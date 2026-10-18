@@ -1,0 +1,47 @@
+{
+  "hosting": {
+    "public": "web/contact",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ],
+    "headers": [
+      {
+        "source": "/i/**",
+        "headers": [
+          {
+            "key": "X-Robots-Tag",
+            "value": "noindex, nofollow"
+          }
+        ]
+      }
+    ]
+  },
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "storage": {
+    "rules": "storage.rules"
+  },
+  "emulators": {
+    "auth": {
+      "port": 9298
+    },
+    "firestore": {
+      "port": 8180
+    },
+    "storage": {
+      "port": 9299
+    },
+    "hosting": {
+      "port": 5080
+    },
+    "ui": {
+      "enabled": false
+    }
+  }
+}

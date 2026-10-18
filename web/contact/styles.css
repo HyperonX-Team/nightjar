@@ -1,0 +1,181 @@
+/* Nightjar contact page. Palette and type from DESIGN.md: paper, ink, key
+   surface, oxide. Flat surfaces, one accent moment, no shadows. */
+
+@font-face {
+  font-family: 'IBMPlexSans';
+  src: url('/assets/plex-sans.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'IBMPlexSans';
+  src: url('/assets/plex-sans-semibold.woff2') format('woff2');
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'IBMPlexMono';
+  src: url('/assets/plex-mono.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+
+:root {
+  --paper: #e9e5db;
+  --ink: #1c1b18;
+  --key-surface: #d9d3c6;
+  --oxide: #9c3d2e;
+  --muted: #55534a;
+  --rule: #b9b2a4;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0 auto;
+  padding: 20px 16px 32px;
+  max-width: 640px;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'IBMPlexSans', system-ui, sans-serif;
+  font-size: 1rem;
+  line-height: 1.45;
+}
+
+@media (min-width: 420px) {
+  body {
+    padding: 28px 24px 40px;
+  }
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(1.25rem, 5vw, 1.5rem);
+  font-weight: 600;
+}
+
+.status-head {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+h2 {
+  margin: 28px 0 8px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+/* The identity motif: a 1dp ink line under the status, the same rule that sits
+   under the calculator display. */
+.rule {
+  height: 1px;
+  background: var(--ink);
+  margin: 12px 0 0;
+}
+
+.badge {
+  padding: 1px 10px;
+  border-radius: 999px;
+  background: var(--oxide);
+  color: var(--paper);
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.note {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 0.8125rem;
+}
+
+.loader {
+  margin-top: 12px;
+  height: 2px;
+  width: 100%;
+  background: var(--key-surface);
+  position: relative;
+  overflow: hidden;
+}
+
+.loader::after {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 40%;
+  background: var(--ink);
+  animation: slide 1.4s ease-in-out infinite;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(250%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loader::after {
+    animation: none;
+    width: 100%;
+  }
+}
+
+.map {
+  height: 240px;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: var(--key-surface);
+}
+
+@media (min-width: 420px) {
+  .map {
+    height: 280px;
+  }
+}
+
+.coordinates {
+  margin: 12px 0 0;
+  font-family: 'IBMPlexMono', ui-monospace, monospace;
+  font-size: 0.9375rem;
+}
+
+audio {
+  width: 100%;
+  margin-top: 4px;
+}
+
+.call {
+  display: block;
+  margin-top: 32px;
+  min-height: 48px;
+  padding: 14px 16px;
+  border-radius: 8px;
+  background: var(--ink);
+  color: var(--paper);
+  text-align: center;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.call:focus-visible,
+a:focus-visible,
+audio:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+.call:active {
+  background: #060606;
+}

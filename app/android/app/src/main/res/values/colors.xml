@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- The calculator face, so launch never flashes a different colour. -->
+    <color name="paper">#E9E5DB</color>
+    <color name="key_surface">#D9D3C6</color>
+</resources>

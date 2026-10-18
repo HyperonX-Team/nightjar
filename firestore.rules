@@ -1,0 +1,38 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+    function ownsIncident(token) {
+      return signedIn()
+        && get(/databases/$(database)/documents/incidents/$(token)).data.ownerUid == request.auth.uid;
+    }
+
+    match /incidents/{token} {
+      allow get: if true;
+      allow list: if false;
+      allow create: if signedIn()
+        && request.resource.data.ownerUid == request.auth.uid
+        && request.resource.data.schemaVersion == 1
+        && request.resource.data.status == 'active'
+        && request.resource.data.expiresAt is timestamp
+        && request.resource.data.expiresAt > request.time;
+      allow update: if signedIn()
+        && resource.data.ownerUid == request.auth.uid
+        && request.resource.data.ownerUid == resource.data.ownerUid
+        && request.resource.data.schemaVersion == resource.data.schemaVersion
+        && request.time < resource.data.expiresAt;
+      allow delete: if signedIn()
+        && resource.data.ownerUid == request.auth.uid;
+
+      match /pings/{pingId} {
+        allow get, list: if true;
+        allow create: if signedIn()
+          && ownsIncident(token)
+          && request.time < request.resource.data.expiresAt;
+        allow update, delete: if false;
+      }
+    }
+  }
+}

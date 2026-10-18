@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' https://www.gstatic.com https://unpkg.com; style-src 'self' https://unpkg.com; img-src 'self' data: https://tile.openstreetmap.org https://unpkg.com; connect-src 'self' https://firestore.googleapis.com https://firebasestorage.googleapis.com http://127.0.0.1:8180 http://10.0.2.2:8180; media-src https://firebasestorage.googleapis.com; font-src 'self'; base-uri 'none'; form-action 'none'"
+    />
+    <!-- The two localhost origins in connect-src exist only for the emulator
+         path in SPEC 30.3. Remove them for a deployment that never uses it. -->
+    <title>Alert</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <noscript>
+      <p class="note">This page needs JavaScript.</p>
+    </noscript>
+
+    <header class="status">
+      <div class="status-head">
+        <h1 id="status-title">Opening alert</h1>
+        <span id="live-badge" class="badge" hidden>Live</span>
+      </div>
+      <p id="status-line" class="note" hidden></p>
+      <div class="rule" role="presentation"></div>
+      <div id="loader" class="loader" role="status" aria-label="Loading"></div>
+    </header>
+
+    <main id="main" hidden>
+      <section aria-labelledby="location-heading">
+        <h2 id="location-heading">Location</h2>
+        <!-- Plain container: Leaflet adds its own controls, and the
+             coordinates line below is the accessible source of truth. -->
+        <div id="map" class="map"></div>
+        <p id="coordinates" class="coordinates" hidden></p>
+        <p id="location-age" class="note" hidden></p>
+      </section>
+
+      <section aria-labelledby="audio-heading" id="audio-section" hidden>
+        <h2 id="audio-heading">Audio</h2>
+        <audio id="audio" controls preload="metadata" aria-label="Alert recording"></audio>
+        <p id="audio-note" class="note" hidden></p>
+      </section>
+
+      <p id="expiry" class="note" hidden></p>
+
+      <a id="call" class="call" href="tel:112">Call emergency services</a>
+    </main>
+  </body>
+  <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <!-- Absolute paths: the page is served from /i/<token>, and Hosting
+       rewrites every unknown path to index.html. -->
+  <script type="module" src="/app.js"></script>
+</html>

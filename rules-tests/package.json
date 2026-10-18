@@ -1,0 +1,14 @@
+{
+  "name": "nightjar-rules-tests",
+  "private": true,
+  "type": "module",
+  "description": "Firestore and Storage rules tests for Nightjar (SPEC 39.3).",
+  "scripts": {
+    "test": "mocha --reporter spec --timeout 15000 \"*.test.js\""
+  },
+  "devDependencies": {
+    "@firebase/rules-unit-testing": "^3.0.4",
+    "firebase": "^10.12.2",
+    "mocha": "^10.7.3"
+  }
+}

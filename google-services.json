@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "364661250190",
+    "project_id": "nightjar-8d561",
+    "storage_bucket": "nightjar-8d561.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:364661250190:android:6d882abbf57185f4cd91df",
+        "android_client_info": {
+          "package_name": "com.hyperonx.nightjar"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCc9fbZ3W8P1K2TGYzJvXXy9etR5qrZ7VA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
